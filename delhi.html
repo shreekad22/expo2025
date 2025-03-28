@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Delhi Foods</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #ff0000;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-image {
+      background-color: white;
+      border-radius: 6px;
+      padding: 8px;
+      margin-bottom: 16px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .product-image img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: contain;
+    }
+
+    .product-info {
+      text-align: center;
+    }
+
+    .product-title {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      font-weight: 500;
+      margin: 8px 0;
+    }
+
+    .add-to-cart {
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .add-to-cart:hover {
+      background-color: #555;
+    }
+
+   
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .close-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.close-button:hover {
+  background-color: rgb(95, 93, 93);
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.quantity-controls button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quantity-controls button:hover {
+  background-color: #555;
+}
+
+.quantity {
+  font-size: 16px;
+  font-weight: bold;
+  width: 20px;
+  text-align: center;
+}
+.quantity-controls button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 12px; 
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px; 
+}
+
+.quantity-controls .quantity {
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 32px; 
+  text-align: center;
+  padding: 8px; 
+  background-color: white; 
+  border-radius: 4px;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>DELHI FOODS</h1>
+      <div class="cart-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="cart-badge" id="cart-count">2</span>
+      </div>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+     
+    </div>
+  </div>
+  <button class="close-button" onclick="redirectToPage()">Close</button>
+
+  
+
+  <script>
+   
+  
+  const products = [
+    {
+      name: "CHOLE BATURE",
+      
+      price: 180,
+      image: "https://madhurasrecipe.com/wp-content/uploads/2020/10/Chole-Bhature-Marathi-Recipe-585x366.jpg"
+    },
+    {
+      
+      name: "BUTTER CHICKEN",
+      price: 350,
+      image: "https://www.simplyrecipes.com/thmb/LYwosfrO2cGCT2_bGS5wIeHRnd8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/_optaboutcomcoeusresourcescontent_migrationsimply_recipesuploads201901_Butter-Chicken-LEAD-1-f8a0cd09ea9442ce93651887f164db03.jpg"
+    },
+    {
+      
+      name: "AALO PARATHAS",
+      price: 80,
+      image: "https://static.wixstatic.com/media/e22900_63c0ca8644ab45b88929bea0adcff20b~mv2.jpg/v1/fill/w_980,h_633,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/e22900_63c0ca8644ab45b88929bea0adcff20b~mv2.jpg"
+    },
+    {
+      
+      name: "ALOO TIKKI",
+      price: 40,
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Aloo_Tikki_served_with_chutneys.jpg/640px-Aloo_Tikki_served_with_chutneys.jpg"
+    },
+    {
+      
+      name: "JALEBI",
+      price: 120,
+      image: "https://images.pexels.com/photos/14530314/pexels-photo-14530314.jpeg?cs=srgb&dl=pexels-sarayu-p-371879973-14530314.jpg&fm=jpg"
+    },
+    {
+      
+      name: "NIHARI",
+      price: 220,
+      image: "https://swatisani.net/kitchen/wp-content/uploads/2015/12/IMG_9583.jpg"
+    },
+    {
+      
+      name: "KEBABAS",
+      price: 350,
+      image: "https://t3.ftcdn.net/jpg/05/44/41/60/360_F_544416045_am9TzMCq2bWGfEfyTlTNWLtM2xfQA5xd.jpg"
+    },
+    {
+      
+      name: "RAJMA CHAWAL",
+      price: 160,
+      image: "https://img.buzzfeed.com/tasty-app-user-assets-prod-us-east-1/recipes/17a928443e754d54a4c0a125bc2b9c74.jpeg?resize=1200:*&output-format=jpg&output-quality=auto"
+    }
+  ];
+
+  
+  let cartCount = 2;
+
+  
+  function renderProducts() {
+    const productGrid = document.getElementById('product-grid');
+
+    products.forEach(product => {
+      const productCard = document.createElement('div');
+      productCard.className = 'product-card';
+
+      productCard.innerHTML = `
+        <div class="product-image">
+          <img src="${product.image}" alt=" ${product.name}">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title"> ${product.name}</h3>
+          <p class="product-price">₹${product.price}</p>
+          <div class="quantity-controls">
+            <button class="decrease-btn" onclick="changeQuantity(this, -1)">-</button>
+            <span class="quantity">1</span>
+            <button class="increase-btn" onclick="changeQuantity(this, 1)">+</button>
+          </div>
+          <button class="add-to-cart" onclick="addToCart(this)">Add To Cart</button>
+        </div>
+      `;
+
+      productGrid.appendChild(productCard);
+    });
+  }
+
+ 
+  function changeQuantity(button, change) {
+    let quantitySpan = button.parentElement.querySelector(".quantity");
+    let currentQuantity = parseInt(quantitySpan.textContent);
+    
+    if (currentQuantity + change >= 1) {
+      quantitySpan.textContent = currentQuantity + change;
+    }
+  }
+
+  
+  function addToCart(button) {
+    let quantity = parseInt(button.previousElementSibling.querySelector(".quantity").textContent);
+    cartCount += quantity;
+    updateCartCount();
+  }
+
+  
+  function updateCartCount() {
+    const cartCountElement = document.getElementById('cart-count');
+    cartCountElement.textContent = cartCount;
+  }
+
+ 
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+  });
+
+ 
+  function redirectToPage() {
+    window.location.href = "home.html"; 
+  }
+
+  </script>
+</body>
+</html>

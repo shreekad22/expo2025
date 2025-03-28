@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Chennai Foods</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      
+    }
+
+    
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #ff0000;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-image {
+      background-color: white;
+      border-radius: 6px;
+      padding: 8px;
+      margin-bottom: 16px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .product-image img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: contain;
+    }
+
+    .product-info {
+      text-align: center;
+    }
+
+    .product-title {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .product-price {
+      font-weight: 500;
+      margin: 8px 0;
+    }
+
+    .add-to-cart {
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .add-to-cart:hover {
+      background-color: #555;
+    }
+
+   
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .close-button {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.close-button:hover {
+  background-color: rgb(95, 93, 93);
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.quantity-controls button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.quantity-controls button:hover {
+  background-color: #555;
+}
+
+.quantity {
+  font-size: 16px;
+  font-weight: bold;
+  width: 20px;
+  text-align: center;
+}
+.quantity-controls button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 12px; 
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px; 
+}
+
+.quantity-controls .quantity {
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 32px; 
+  text-align: center;
+  padding: 8px; 
+  background-color: white; 
+  border-radius: 4px;
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>CHENNAI FOODS</h1>
+      <div class="cart-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="cart-badge" id="cart-count">2</span>
+      </div>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+     
+    </div>
+  </div>
+  <button class="close-button" onclick="redirectToPage()">Close</button>
+
+  
+
+  <script>
+   
+  
+  const products = [
+    {
+      name: "DOSA",
+      
+      price: 140,
+      image: "https://static01.nyt.com/images/2015/01/28/dining/28KITCHEN1/28KITCHEN1-superJumbo.jpg"
+    },
+    {
+      
+      name: "IDLI",
+      price: 60,
+      image: "https://www.foodie-trail.com/wp-content/uploads/2020/06/251fdbc0-57f6-41c3-a976-5192391cf040.jpg"
+    },
+    {
+      
+      name: "PONGAL",
+      price: 80,
+      image: "https://www.yummytummyaarthi.com/wp-content/uploads/2023/10/ven-pongal-1.jpeg"
+    },
+    {
+      
+      name: "KOTHU PAROTTA",
+      price: 210,
+      image: "https://images.herzindagi.info/image/2024/Apr/Kothu-Parotta.jpg"
+    },
+    {
+      
+      name: "SUNDAL",
+      price: 350,
+      image: "https://www.indianveggiedelight.com/wp-content/uploads/2021/09/chickpea-sundal-featured.jpg"
+    },
+    {
+      
+      name: "JIGARTHANDA ",
+      price: 120,
+      image: "https://mfjllp.com/wp-content/uploads/2023/10/DSC05819-min-scaled-1-1-1-e1697534172334-1.jpg"
+    },
+    {
+      
+      name: "MURUKKU",
+      price: 230,
+      image: "https://cdn.kuali.com/wp-content/uploads/2021/10/27212557/840x560-Savoury-Murukku.jpg"
+    },
+    {
+      
+      name: "SAMBHAR ",
+      price: 240,
+      image: "https://en-media.thebetterindia.com/uploads/2025/02/sambhar-1740568837.jpg"
+    }
+  ];
+
+  
+  let cartCount = 2;
+
+  
+  function renderProducts() {
+    const productGrid = document.getElementById('product-grid');
+
+    products.forEach(product => {
+      const productCard = document.createElement('div');
+      productCard.className = 'product-card';
+
+      productCard.innerHTML = `
+        <div class="product-image">
+          <img src="${product.image}" alt=" ${product.name}">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title"> ${product.name}</h3>
+          <p class="product-price">₹${product.price}</p>
+          <div class="quantity-controls">
+            <button class="decrease-btn" onclick="changeQuantity(this, -1)">-</button>
+            <span class="quantity">1</span>
+            <button class="increase-btn" onclick="changeQuantity(this, 1)">+</button>
+          </div>
+          <button class="add-to-cart" onclick="addToCart(this)">Add To Cart</button>
+        </div>
+      `;
+
+      productGrid.appendChild(productCard);
+    });
+  }
+
+ 
+  function changeQuantity(button, change) {
+    let quantitySpan = button.parentElement.querySelector(".quantity");
+    let currentQuantity = parseInt(quantitySpan.textContent);
+    
+    if (currentQuantity + change >= 1) {
+      quantitySpan.textContent = currentQuantity + change;
+    }
+  }
+
+  
+  function addToCart(button) {
+    let quantity = parseInt(button.previousElementSibling.querySelector(".quantity").textContent);
+    cartCount += quantity;
+    updateCartCount();
+  }
+
+  
+  function updateCartCount() {
+    const cartCountElement = document.getElementById('cart-count');
+    cartCountElement.textContent = cartCount;
+  }
+
+ 
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+  });
+
+ 
+  function redirectToPage() {
+    window.location.href = "home.html"; 
+  }
+
+  </script>
+</body>
+</html>

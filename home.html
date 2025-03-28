@@ -1,0 +1,710 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head> 
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+     <title>Food Website</title>
+     
+           <style>
+           * {
+             margin: 0;
+             padding: 0;
+             box-sizing: border-box;
+             font-family: Arial, sans-serif;
+         }
+         body {
+             background-color: #E3D2C3;
+             color: #443627;
+         }
+         .navbar {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             background: #443627;
+             padding: 15px 20px;
+             flex-wrap: wrap;
+             position: relative;
+             z-index: 100;
+         }
+         .navbar .logo {
+             position: relative;
+             height: 50px;
+             width: 60px;
+         }
+         .navbar .nav-right {
+             display: flex;
+             align-items: center;
+             gap: 15px;
+         }
+         .navbar a {
+             color: #D98324;
+             text-decoration: none;
+             padding: 10px;
+         }
+         .search-bar {
+             padding: 5px;
+             border-radius: 5px;
+             border: none;
+             background-color: #EFDCAB;
+         }
+         .carousel {
+             width: 100%;
+             max-width: 100vw;
+             overflow: hidden;
+             position: relative;
+             margin: 20px 0;
+         }
+         .carousel img {
+             width: 100%;
+             height: 400px;
+             object-fit: cover;
+             display: none;
+         }
+         .carousel img.active {
+             display: block;
+         }
+         .carousel-controls {
+             position: absolute;
+             top: 50%;
+             width: 100%;
+             display: flex;
+             justify-content: space-between;
+             transform: translateY(-50%);
+         }
+         .carousel-controls button {
+             background: #443627;
+             color: #E3D2C3;
+             border: none;
+             padding: 10px 20px;
+             cursor: pointer;
+         }
+         .section {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+             gap: 120px;
+             padding: 10rcap;
+         }
+         .card {
+             width: 100rem;
+             max-width: 350px;
+             text-align: center;
+             border-radius: 20px;
+             overflow: hidden;
+             transition: transform 0.2s ease-in-out;
+         }
+         .card:hover {
+             transform: scale(1.05);
+         }
+         .card img {
+             width: 100%;
+             height: auto;
+             border-radius: 20px;
+         }
+         .card-content {
+             padding: 15px;
+             background-color: #fff;
+             border-radius: 0 0 20px 20px;
+         }
+         p {
+             font-size: 18px;
+             color: #443627;
+     
+         }
+           button {
+             width: 100px;
+             padding: 8px;
+             border: none;
+             background-color: #443627;
+             color: white;
+             border-radius: 10px;
+             cursor: pointer;
+             transition: background-color 0.3s ease-in-out;
+         } 
+         button:hover {
+             background-color: #6b4f36;
+         } 
+         @media (max-width: 768px) {
+             .navbar {
+                 flex-direction: column;
+                 align-items: center;
+                 text-align: center;
+             }
+             .navbar .nav-right {
+                 flex-direction: column;
+                 gap: 10px;
+                 width: 100%;
+                  animation-delay: 1s; 
+             }
+             .carousel img {
+                 height: 300px;
+             }
+         }
+         
+         @media (max-width: 480px) {
+             .carousel img {
+                 height: 200px;
+             }
+             .section {
+                 flex-direction: column;
+                 align-items: center;
+             }
+             .card {
+                 width: 100%;
+                 max-width: 90%;
+             }
+         }
+         
+ 
+         .place {
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+             gap: 20px;
+             padding: 20px;
+             border-radius: 10px;
+             
+         }
+ 
+         
+         .card {
+             background: white;
+             width: 280px;
+             border-radius: 10px;
+             overflow: hidden;
+             box-shadow: 0 4px 8px rgba(211, 211, 211, 0.2);
+             transition: transform 0.3s ease-in-out;
+         }
+ 
+         .card img {
+             width: 100%;
+             height: 180px;
+             object-fit: cover;
+             border-radius: 10px;
+         }
+ 
+         .card-content {
+             padding: 15px;
+         }
+ 
+         .card h2 {
+             margin: 10px 0;
+             color:  #443627;
+         }
+ 
+         .card p {
+             font-size: 14px;
+             color: #666;
+         }
+ 
+         .card:hover {
+             transform: scale(1.05);
+         }
+          .card2{
+             border-radius: 10px;
+         }
+         img{
+             border-radius: 10px;
+         }
+         
+         .text-center text-body-secondary{
+             display: flex;
+             align-items: center;
+         }
+         
+         .mid{
+             background-image: url(./Assets/uha.jpg);
+         }
+         #cart{
+             position: relative;
+         }
+         #span{
+             display: flex;
+             width: 20px;
+             height: 20px;
+             background-color: red;
+             justify-content: center;
+             align-items: center;
+             color: #fff;
+             border-radius: 50%;
+             position: absolute;
+             top: 37px;
+             right: 268px;
+         }
+         .nav-links {
+             list-style: none;
+             display: flex;
+             gap: 20px;
+         }
+ 
+     .nav-links li {
+             position: relative;
+         }
+ 
+     .nav-links a {
+             text-decoration: none;
+             padding: 10px;
+             display: block;
+         }
+ 
+     .dropdown-content {
+         display: none;
+         position: absolute;
+         background: white;
+         min-width: 120px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ 
+     }
+ 
+     .dropdown-content li {
+         display: block;
+     }
+ 
+     .dropdown-content a {
+         color: black;
+         padding: 10px;
+     }
+ 
+     .dropdown:hover .dropdown-content {
+         display: block;
+     }
+     .dropdown-menu {
+         position: absolute;
+         top: 100%;
+         left: 0;
+         background-color: white;
+         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+         border-radius: 5px;
+         min-width: 150px;
+         overflow: hidden;
+         z-index: 101; 
+     }
+ .footer{
+	background-color:  #6b4f36;
+    padding: 20px 150px 20px 150px;
+    
+}
+.footer h1{
+    text-align: center;
+    
+}
+.footer-col p{
+    color:#dccbca;
+    
+}
+.footer-col{
+   width: 25%;
+   padding: 30px 10px;
+}
+.footer-col h4{
+	font-size: 18px;
+    
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #443627;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #c4a3a3;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(34, 32, 32, 0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #b48b8b;
+	background-color: #ffffff;
+}
+
+    .container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+
+
+
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}}
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(30, 29, 29, 0.6);
+            color: rgb(21, 21, 21);
+            z-index: 10;
+        }
+        .logo img {
+            height: 50px;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .nav-right a {
+            color: rgb(26, 24, 24);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+        }
+        .search-bar {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        #cart {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #span {
+            background: red;
+            color: white;
+            padding: 3px 7px;
+            border-radius: 50%;
+            font-size: 14px;
+            margin-left: -10px;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 120px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .dropdown-content li {
+            list-style: none;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+        }
+        .carousel img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: none;
+        }
+        .carousel img.active {
+            display: block;
+        }
+        
+     </style>
+ 
+     
+ </head>
+ <body>
+    <div class="navbar">
+        <div class="logo"><img src="./Assets/logo spoon.jpg" alt="logo"></div>
+        
+        <div class="nav-right">
+                      <!-- <div class="search-bar" style="color: black; width: 250px;">Search Bar</div> -->
+                      <div class="search-container">
+                        
+                        <form action="https://www.google.com/search" method="GET">
+                            
+                            <input type="text" name="" placeholder="🔍 SEARCH"button type="submit"></button>
+                            <!-- <button type="submit">🔍</button> -->
+                        </form>
+                    </div> 
+<a href="home.html" style="color: white;">Home</a>
+                        <a href="rate.html" style="color: white;">Rate US</a>
+            <br>
+  <ul class="nav-links">
+<li class="dropdown">
+                    <a href="#" class="dropbtn" style="color: white;">My Account ▼</a>
+  <ul class="dropdown-content">
+            <li><a href="#" >Profile</a></li>
+                   <li><a href="#">Orders</a></li>
+        <li><a href="#">Logout</a></li>
+                    </ul>
+        </li>
+            </ul>
+            <a href="track.html" style="color: white;">Track Order</a>
+        </div>
+    </div>
+  
+    <div class="carousel">
+        <img src="./assets/masala.jpg" class="active">
+        <img src="./assets/pavbaji.jpg">
+        <img src="./assets/dosa.jpg">
+        <img src="./assets/samosa.jpg">
+        <img src="./assets/shree chiken.jpg">
+        <img src="./assets/amirali-mirhashemian-ZSukCSw5VV4-unsplash (1).jpg">
+        
+        <div class="carousel-controls">
+
+        </div>
+    </div>
+    
+    <script>
+        let currentIndex = 0;
+        const image = document.querySelectorAll('.carousel img');
+    
+        function showSlide(index) {
+            images.forEach((img, i) => {
+                img.classList.toggle('active', i === index);
+            });
+        }
+    
+        function prevSlide() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            showSlide(currentIndex);
+        }
+    
+        function nextSlide() {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            showSlide(currentIndex);
+        }
+    
+        setInterval(nextSlide, 3000); 
+    </script>
+        <div class="section">
+        <div class="card" style="width: 400px; height: 500px;">
+            <img src="./assets/break2.jpg" style="height: 400px; width: 400px;">
+            <div class="card-content" style="padding-bottom: 10px;">
+                <p>"Fuel Your Day with Flavorful Breakfast"<br>
+                   "The secret to a perfect morning"</p>
+                <button onclick="redirectToPage()">Breakfast</button>
+            </div>
+        </div>
+        <div class="card" style="width: 400px; height: 500px;">
+            <img src="./assets/lunch 5.jpg" style="height: 400px; width: 400px;">
+            <div class="card-content">
+                <p>"A Midday Feast to Keep You Going."<br>
+                   "Enjoy a Delicious, Satisfying Meal Anytime."</p>
+                <button onclick="redirect1()">Lunch</button>
+            </div>
+        </div>
+        <div class="card" style="width: 400px; height: 500px;">
+            <img src="./assets/dinner.jpg" style="height: 400px; width: 400px;">
+            <div class="card-content">
+                <p>"End Your Day with a Hearty, Tasty Meal."<br>
+                   "Delightful Flavors for a Perfect Evening."</p>
+                <button onclick="redirect()">Dinner</button>
+            </div>
+        </div>
+    </div>
+    <div class="poster">
+                <img src="./assets/poster.jpg" alt="Centered Image" style="display: block; margin: auto;">
+                
+    </div>
+
+    
+   
+</div>
+</div>
+</div>
+     
+  <div class="section" style="margin-top: 0px; height: 50px;">
+    <h1>Top Indian Food Places</h1>
+       </div>
+  
+    <a href="delhi.html"><div class="place">
+        <div class="card">
+            <img src="./assets/delhi image.jpg" alt="Delhi Food">
+            <div class="card-content">
+                <h2>Delhi</h2>
+                <p>Experience the best street food and Mughlai cuisine.</p>
+            </div>
+        </div></a>
+       
+<a href="mumbai.html"><div class="card">
+    <img src="./assets/mumbai vada.jpg" alt="Mumbai Food">
+    <div class="card-content">
+        <h2>Mumbai</h2>
+        <p>Famous for Vada Pav, Pav Bhaji, and more.</p>
+    </div>
+</div></a>
+
+<a href="Kolkata.html"><div class="card">
+    <img src="./assets/kolkata - Copy.jpg" alt="Kolkata Food">
+    <div class="card-content">
+        <h2>Kolkata</h2>
+        <p>Enjoy delicious Bengali sweets and seafood.</p>
+    </div>
+</div></a>
+
+<a href="chennai.html"><div class="card">
+    <img src="./assets/channai.jpg" alt="Chennai Food">
+    <div class="card-content">
+        <h2>Chennai</h2>
+        <p>Authentic South Indian flavors and filter coffee.</p>
+    </div>
+</div></a>
+
+<a href="hyderabad.html"><div class="card">
+    <img src="./assets/hadrabad.jpg" alt="Hyderabad Food">
+    <div class="card-content">
+        <h2>Hyderabad</h2>
+        <p>Famous for its Biryani and spicy delicacies.</p>
+    </div>
+</div>
+</a>
+
+<a href="kashmir.html"><div class="card">
+    <img src="./assets/kashmir.jpg" alt="Kashmir Food">
+    <div class="card-content">
+        <h2>Kashmir</h2>
+        <p>Traditional Wazwan dishes like Rogan Josh and Gushtaba.</p>
+    </div>
+</div>
+</a>
+
+<a href="assam.html"><div class="card">
+    <img src="./assets/assam.jpg" alt="Assam Food">
+    <div class="card-content">
+        <h2>Assam</h2>
+        <p>Masor Tenga sour fish curry, Aloo Pitika mashed potato dish, and Pitha various rice cakes. </p>
+    </div>
+</div>
+</a>
+<a href="panjab.html"><div class="card">
+    <img src="./assets/punjab.jpg" alt="Punjab Food">
+    <div class="card-content">
+        <h2>Punjab</h2>
+        <p>Delicious Makadi roti Sarson ka sag, Amritsari Kulcha, and Lassi.</p>
+    </div>
+</div></a>
+
+<a href="rajasthan.html"><div class="card">
+    <img src="./assets/Rajashtan.jpg" alt="Rajasthan Food">
+    <div class="card-content">
+        <h2>Rajasthan</h2>
+        <p>Experience the flavors of Dal Baati Churma and Laal Maas.</p>
+    </div>
+</div>
+</a>
+</div>
+
+     <script>
+         let index = 0;
+         const images = document.querySelectorAll('.carousel img');
+         function showSlide(i) {
+             images[index].classList.remove('active');
+             index = (i + images.length) % images.length;
+             images[index].classList.add('active');
+         }
+         function nextSlide() {
+             showSlide(index + 1);
+         }
+         function prevSlide() {
+             showSlide(index - 1);
+         }
+         setInterval(nextSlide, 3000);
+         function redirectToPage() {
+    window.location.href = "breakfast.html";
+          } 
+    function redirect() {
+     window.location.href = "dinner.html";
+  }
+  function redirect1(){
+    window.location.href="lunch.html";
+  }
+
+     </script>
+
+ <footer class="footer">
+    <h1 style="color: rgb(242, 208, 188);">Spoonful Stories</h1>
+    <div class="container">
+        <div class="footer-col">
+            <h4>About us</h4>
+            <ul>
+                <li><a href="#">About</a></li>
+            </ul>
+            <p>Taste Tales</p>
+            <p>Savor Moments</p>
+            <p>Feast Memories</p>
+            <p>Spoon Magic</p>
+            <p>Tasty Narratives</p>
+        </div>
+        <div class="footer-col">  
+            <h4>Contact</h4>
+            <p>📞 +91 1122334455</p>
+            <p>☎ 1800-456-234</p>
+            <p>📧spoonstories123@gmail.com</p></div>
+        <div class="footer-col">
+            <h4>Follow us</h4>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+ </body>
+ </html>
